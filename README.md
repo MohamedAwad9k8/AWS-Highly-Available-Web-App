@@ -201,3 +201,216 @@ I will upload a script to automate the process of installing and configuring wor
 ![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2029.png)
 
 The script is uploaded, now let’s launch the webserver instance.
+
+## Step 8: Checking the webserver
+
+Great it’s working! Let’s finish the setup and move to the next step
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2030.png)
+
+All set, and ready to go
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2031.png)
+
+## Step 9: Creating an AMI out of the webserver
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2032.png)
+
+Give the image a name and description
+
+then scroll down and click “Create”
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2033.png)
+
+## Step 10: Creating Launch Template
+
+Choose Lauch Templates from the side menu
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2034.png)
+
+Fill the name and description
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2035.png)
+
+Choose the AMI we created 
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2036.png)
+
+I will choose the free tier instance type for this project
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2037.png)
+
+For the network settings we won’t specify subnets, but we will choose the security group
+
+after that scroll down and click “Create”
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2038.png)
+
+## Step 11: Creating Auto Scaling Group
+
+Select Auto Scaling Groups from the side menu
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2039.png)
+
+And Select create Auto Scaling Group
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2040.png)
+
+Fill the name, and choose the launch template, then click “next”
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2041.png)
+
+Choose the Project VPC, and choose the two private subnets, then “click “next”
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2042.png)
+
+We will leave this at “No Load Balancer” for now, and click “next”
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2043.png)
+
+We will set the desired number of instances to 2
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2044.png)
+
+Also we will set the minimum to 2m and the maximum to 4
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2045.png)
+
+Then we will set the scaling policy
+
+so that the number of instances increase, when the CPUs utilization is 60%, click “next” after
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2046.png)
+
+I will not use SNS notifications for this project, to try and keep it simple
+
+Click “next” and finally click on “Create Auto Scaling group”
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2047.png)
+
+## Step 12: Creating Target Group for the Load Balancer
+
+Click on “Create Target Group”
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2048.png)
+
+Choose Instance
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2049.png)
+
+Fill the name, choose the desired protocol, and choose the Project VPC
+
+Scroll down and click “next”
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2050.png)
+
+Notice the newly two created webservers, from the Auto Scaling group
+
+we will not choose targets here, scroll down and click “Create Target Group”
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2051.png)
+
+## Step 13: Creating Application Load Balancer
+
+Click on Create Load Balancer
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2052.png)
+
+Choose Application Load Balancer
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2053.png)
+
+Give it a name, choose Internet facing and IPv4
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2054.png)
+
+In the network mapping, choose the two public subnets
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2055.png)
+
+Choose the webserver security group
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2056.png)
+
+Adjust this as follows
+
+then scroll down and click “Create Load Balancer”
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2057.png)
+
+## Step 14: Edit the Auto Scaling Group, and add the load balancer
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2058.png)
+
+Optionally you can add “Name” tag so that the instances created from Auto Scaling group have name.
+
+Press “Update” after.
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2059.png)
+
+## Step 15: Testing the Load Balancer and Auto Scaling Group
+
+Now go to the Load Balancer and choose “Resource Map” tab
+
+Here you can see the instances appeared in the target group
+Note: It’s also possible to create the Load Balancer first before creating the Auto Scaling Group, this way, we won’t have to go back and edit the Auto Scaling Group.
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2060.png)
+
+Copy the DNS Name of the ELB to test it
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2061.png)
+
+Voilà! The site is working great on Load Balancer, which is connected to the Auto Scaling Group instances in the Private Subnets.
+
+This will ensure higher security for our servers.
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2062.png)
+
+To test the Auto Scaling group let’s delete instances
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2063.png)
+
+The webserver is of no use now, so I will terminate it.
+
+I will also terminate the instance in AZ1, the expected behavior is the website will continue to work nicely through the ELB, and in few minutes, the auto scaling group will create a new instance to replace the unhealthy one.
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2064.png)
+
+The resource map now shows only 1 healthy target
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2065.png)
+
+The site is still working smoothly
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2066.png)
+
+Few moments later, the Auto Scaling group created a new Instance in AZ1
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2067.png)
+
+Let’s re-do the process with the the Instance in the AZ2
+
+ 
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2068.png)
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2069.png)
+
+Great! the site is still working smootly.
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2070.png)
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2071.png)
+
+A new instance has been launched in AZ2, automatically by the Auto Scaling Group
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2072.png)
+
+The project is working as expected, and the highly available and scalable WordPress website is now ready for use!!!
+
+Note: Here’s a diagram to help visualize the connections and configurations of ELB and Auto Scaling Group
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2073.png)
+
+![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2074.png)
