@@ -408,9 +408,3 @@ A new instance has been launched in AZ2, automatically by the Auto Scaling Group
 ![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2072.png)
 
 The project is working as expected, and the highly available and scalable WordPress website is now ready for use!!!
-
-Note: Here’s a diagram to help visualize the connections and configurations of ELB and Auto Scaling Group
-
-![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2073.png)
-
-![image.png](https://github.com/MohamedAwad9k8/AWS-Highly-Available-Web-App/blob/main/images/image%2074.png)
